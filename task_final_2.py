@@ -38,9 +38,9 @@ def get_dates_low():
     for i in range(5):
         low_list.append(forecasts[i])
 
-    print(low_list)
+    #print(low_list)
     low = low_list[0]['low']
-    print(low)
+    #print(low)
     for days in low_list:
         if days['low'] < str(low):
             low= days['low']
