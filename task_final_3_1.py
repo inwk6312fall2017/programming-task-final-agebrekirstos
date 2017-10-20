@@ -30,5 +30,5 @@ def acl_dict():
 			d[acl] = d.get(acl, 0) + 1
 	return d
 
-#replace_config()
+replace_config()
 print(acl_dict())
