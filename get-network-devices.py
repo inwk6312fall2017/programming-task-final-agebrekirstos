@@ -74,8 +74,27 @@ def getNetworkDevices(ticket):
 	#Iterate through network device data and print the id and series name of each device
 	for i in r_json["response"]:
 		print(i["id"] + "   " + '{:53}'.format(i["series"]) + "  " + i["reachabilityStatus"])
+
+def getnetworkdevicecount(ticket):
+	"""returns the network device count under the control of APIC-EM"""
+	url = "https://" + controller + "/api/v1/network-device/count"
+
+	# Content type as well as the ticket must be included in the header
+	header = {"content-type": "application/json", "X-Auth-Token": ticket}
+
+	# this statement performs a GET on the specified network device url
+	response = requests.get(url, headers=header, verify=False)
+
+	print("Number of Network Devices = ")
+	#print(json.dumps(response.json(), indent=4, separators=(',', ': ')))
+
+	r_json = response.json()
+	print(r_json["response"])
+
+
 		
 
 
 theTicket=getTicket()
-getNetworkDevices(theTicket)
+#getNetworkDevices(theTicket)
+getnetworkdevicecount((theTicket))
