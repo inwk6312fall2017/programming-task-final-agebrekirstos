@@ -46,12 +46,12 @@ response= requests.post(url,data=json.dumps(payload), headers=header, verify=Fal
 #convert response to json format
 r_json=response.json()
 
-print(r_json)
+#print(r_json)
 #parse the json to get the service ticket
 ticket = r_json["response"]["serviceTicket"]
 
 # URL for Host REST API call to get list of exisitng hosts on the network.
-url = "https://" + controller + "/api/v1/host?limit=1&offset=1"
+url = "https://" + controller + "/api/v1/host"
 
 #Content type must be included in the header as well as the ticket
 header = {"content-type": "application/json", "X-Auth-Token":ticket}
@@ -66,4 +66,10 @@ print (json.dumps(response.json(), indent=4, separators=(',', ': ')))
 
 r_resp=response.json()
 
-print(r_resp["response"][0]["hostIp"])
+#print(r_resp["response"][0]["hostIp"])
+
+for item in r_resp["response"]:
+    #print(item["hostIp"],item["hostMac"])
+    print(item["id"] + "   " + '{}'.format(item["hostIp"]) + "  " + item["hostMac"])
+
+
